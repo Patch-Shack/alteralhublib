@@ -1,0 +1,133 @@
+function loadstr(linkN)
+loadstring(game:HttpGet(linkN))();
+end
+local lib = {};
+function lib.create(newName,loader)
+local Design = Instance.new("ScreenGui")
+local Main_Begin = Instance.new("ImageLabel")
+local begin = Instance.new("TextButton")
+local begin_Roundify_12px = Instance.new("ImageLabel")
+local BeginLabel = Instance.new("TextLabel")
+local GameName = Instance.new("TextLabel")
+local Title = Instance.new("TextLabel")
+local exit = Instance.new("TextButton")
+
+local PARENT
+if game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
+    PARENT = game:GetService("CoreGui").RobloxGui
+else
+    PARENT = game:GetService("CoreGui")
+end
+function randomString()
+    local length = math.random(10,20)
+    local array = {}
+    for i = 1, length do
+        array[i] = string.char(math.random(32, 126))
+    end
+    return table.concat(array)
+end
+
+Design.Name = randomString()
+Design.Parent = PARENT
+Design.ResetOnSpawn = false
+
+Main_Begin.Name = "Main_Begin"
+Main_Begin.Parent = Design
+Main_Begin.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main_Begin.BackgroundTransparency = 1.000
+Main_Begin.Position = UDim2.new(0.434175521, 0, 0.420932859, 0)
+Main_Begin.Size = UDim2.new(0, 291, 0, 138)
+Main_Begin.Image = "rbxassetid://3570695787"
+Main_Begin.ImageColor3 = Color3.fromRGB(15, 15, 15)
+Main_Begin.ScaleType = Enum.ScaleType.Slice
+Main_Begin.SliceCenter = Rect.new(100, 100, 100, 100)
+Main_Begin.Active = true
+Main_Begin.Draggable = true
+
+begin.Name = "begin"
+begin.Parent = Main_Begin
+begin.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+begin.BackgroundTransparency = 1.000
+begin.BorderColor3 = Color3.fromRGB(0, 0, 0)
+begin.BorderSizePixel = 0
+begin.Position = UDim2.new(0.171821296, 0, 0.586956501, 0)
+begin.Size = UDim2.new(0, 192, 0, 36)
+begin.Font = Enum.Font.SourceSans
+begin.Text = "Start"
+begin.TextColor3 = Color3.fromRGB(255, 255, 255)
+begin.TextSize = 20.000
+
+begin_Roundify_12px.Name = "begin_Roundify_12px"
+begin_Roundify_12px.Parent = begin
+begin_Roundify_12px.Active = true
+begin_Roundify_12px.AnchorPoint = Vector2.new(0.5, 0.5)
+begin_Roundify_12px.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+begin_Roundify_12px.BackgroundTransparency = 1.000
+begin_Roundify_12px.Position = UDim2.new(0.5, 0, 0.5, 0)
+begin_Roundify_12px.Selectable = true
+begin_Roundify_12px.Size = UDim2.new(1, 0, 1, 0)
+begin_Roundify_12px.Image = "rbxassetid://3570695787"
+begin_Roundify_12px.ImageColor3 = Color3.fromRGB(58, 58, 58)
+begin_Roundify_12px.ScaleType = Enum.ScaleType.Slice
+begin_Roundify_12px.SliceCenter = Rect.new(100, 100, 100, 100)
+
+BeginLabel.Name = "BeginLabel"
+BeginLabel.Parent = begin
+BeginLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BeginLabel.BackgroundTransparency = 1.000
+BeginLabel.BorderSizePixel = 0
+BeginLabel.Size = UDim2.new(0, 192, 0, 36)
+BeginLabel.Font = Enum.Font.Highway
+BeginLabel.Text = "Start"
+BeginLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+BeginLabel.TextSize = 20.000
+
+GameName.Name = "GameName"
+GameName.Parent = Main_Begin
+GameName.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GameName.BackgroundTransparency = 1.000
+GameName.BorderSizePixel = 0
+GameName.Position = UDim2.new(0.171821311, 0, 0.355072439, 0)
+GameName.Size = UDim2.new(0, 192, 0, 21)
+GameName.Font = Enum.Font.SourceSans
+GameName.Text = newName
+GameName.TextColor3 = Color3.fromRGB(255, 255, 255)
+GameName.TextSize = 14.000
+
+Title.Name = "Title"
+Title.Parent = Main_Begin
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.BackgroundTransparency = 1.000
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.261168361, 0, 0.0724637657, 0)
+Title.Size = UDim2.new(0, 138, 0, 23)
+Title.Font = Enum.Font.SourceSans
+Title.Text = "Alteral Hub"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 20.000
+
+exit.Name = "exit"
+exit.Parent = Main_Begin
+exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+exit.BackgroundTransparency = 1.000
+exit.BorderSizePixel = 0
+exit.Position = UDim2.new(0.893470764, 0, 0.0507246368, 0)
+exit.Size = UDim2.new(0, 22, 0, 26)
+exit.Font = Enum.Font.SourceSansLight
+exit.Text = "X"
+exit.TextColor3 = Color3.fromRGB(255, 255, 255)
+exit.TextScaled = true
+exit.TextSize = 14.000
+exit.TextWrapped = true
+
+exit.MouseButton1Click:Connect(function()
+	Design:Destroy()
+end)
+
+begin.MouseButton1Click:Connect(function()
+	loadstr(loader)
+end)
+
+end
+
+return lib
