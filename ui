@@ -4,13 +4,13 @@ end
 local lib = {};
 function lib.create(newName,loader)
 local Design = Instance.new("ScreenGui")
-local Main_Begin = Instance.new("ImageLabel")
+local Main_Begin = Instance.new("Frame")
 local begin = Instance.new("TextButton")
 local begin_Roundify_12px = Instance.new("ImageLabel")
 local BeginLabel = Instance.new("TextLabel")
+local exit = Instance.new("TextButton")
 local GameName = Instance.new("TextLabel")
 local Title = Instance.new("TextLabel")
-local exit = Instance.new("TextButton")
 
 local PARENT
 if game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
@@ -33,14 +33,11 @@ Design.ResetOnSpawn = false
 
 Main_Begin.Name = "Main_Begin"
 Main_Begin.Parent = Design
-Main_Begin.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Main_Begin.BackgroundTransparency = 1.000
-Main_Begin.Position = UDim2.new(0.434175521, 0, 0.420932859, 0)
+Main_Begin.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Main_Begin.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Main_Begin.BorderSizePixel = 2
+Main_Begin.Position = UDim2.new(0.359691441, 0, 0.368121445, 0)
 Main_Begin.Size = UDim2.new(0, 291, 0, 138)
-Main_Begin.Image = "rbxassetid://3570695787"
-Main_Begin.ImageColor3 = Color3.fromRGB(15, 15, 15)
-Main_Begin.ScaleType = Enum.ScaleType.Slice
-Main_Begin.SliceCenter = Rect.new(100, 100, 100, 100)
 Main_Begin.Active = true
 Main_Begin.Draggable = true
 
@@ -82,6 +79,20 @@ BeginLabel.Text = "Start"
 BeginLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 BeginLabel.TextSize = 20.000
 
+exit.Name = "exit"
+exit.Parent = Main_Begin
+exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+exit.BackgroundTransparency = 1.000
+exit.BorderSizePixel = 0
+exit.Position = UDim2.new(0.893470764, 0, 0.0507246368, 0)
+exit.Size = UDim2.new(0, 22, 0, 26)
+exit.Font = Enum.Font.SourceSansLight
+exit.Text = "X"
+exit.TextColor3 = Color3.fromRGB(255, 255, 255)
+exit.TextScaled = true
+exit.TextSize = 14.000
+exit.TextWrapped = true
+
 GameName.Name = "GameName"
 GameName.Parent = Main_Begin
 GameName.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -106,26 +117,13 @@ Title.Text = "Alteral Hub"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 20.000
 
-exit.Name = "exit"
-exit.Parent = Main_Begin
-exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-exit.BackgroundTransparency = 1.000
-exit.BorderSizePixel = 0
-exit.Position = UDim2.new(0.832, 0, 0.072, 0)
-exit.Size = UDim2.new(0, 22, 0, 26)
-exit.Font = Enum.Font.SourceSansLight
-exit.Text = "X"
-exit.TextColor3 = Color3.fromRGB(255, 255, 255)
-exit.TextScaled = true
-exit.TextSize = 14.000
-exit.TextWrapped = true
-
 exit.MouseButton1Click:Connect(function()
 	Design:Destroy()
 end)
 
 begin.MouseButton1Click:Connect(function()
 	loadstr(loader)
+	Design:Destroy()
 end)
 
 end
