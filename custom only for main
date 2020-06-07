@@ -7,7 +7,7 @@ local function initLibrary()
     local CoreGui = GetService(game, "CoreGui");
     local TweenService = GetService(game, "TweenService");
     local UserInputService = GetService(game, "UserInputService");
-	local HotNewName = ("Alteral Hub");
+    local HotNewName = ("Alteral Hub");
 
     local LocalPlayer = Players.LocalPlayer;
 
