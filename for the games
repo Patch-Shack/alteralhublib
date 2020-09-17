@@ -1,13 +1,5 @@
 local Library = {}
 
-local CusParent
-
-if game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
-	CusParent = game:GetService("CoreGui").RobloxGui
-else
-  CusParent = game:GetService("CoreGui")
-end
-
 local function randomString()
 	local length = math.random(10,20)
 	local array = {}
@@ -50,8 +42,8 @@ function Library:CreateWindow()
 	local Exit_UI = Instance.new("ImageButton")
 	local Copyright = Instance.new("TextLabel")
 	
-	UI_Libs.Name = randomString();
-	UI_Libs.Parent = CusParent;
+	UI_Libs.Name = randomString()
+	UI_Libs.Parent = game:GetService("CoreGui")
 	UI_Libs.ResetOnSpawn = false
 	UI_Libs.Enabled = false;
 	
