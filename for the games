@@ -45,7 +45,6 @@ function Library:CreateWindow()
 	UI_Libs.Name = randomString()
 	UI_Libs.Parent = game:GetService("CoreGui")
 	UI_Libs.ResetOnSpawn = false
-	UI_Libs.Enabled = false;
 	
 	Container.Name = "Container"
 	Container.Parent = UI_Libs
@@ -207,10 +206,6 @@ function Library:CreateWindow()
 		ToggleBtn.MouseEnter:Connect(function()
 			Sound(1180994874)
 		end)
-	end
-	
-	function SelfLibrary:Ready()
-		UI_Libs.Enabled = true;
 	end
 	
 	return SelfLibrary
