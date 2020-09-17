@@ -42,7 +42,7 @@ local function Sound(asset)
 	Sound:Destroy()
 end
 
-function Library:CreateWindow()
+function Library:CreateWindow(winName)
 	local UI_Libs = Instance.new("ScreenGui")
 	local Container = Instance.new("Frame")
 	local List = Instance.new("ScrollingFrame")
@@ -103,7 +103,7 @@ function Library:CreateWindow()
 	Copyright.Position = UDim2.new(0.0144635607, 0, 0, 0)
 	Copyright.Size = UDim2.new(0, 268, 0, 44)
 	Copyright.Font = Enum.Font.Highway
-	Copyright.Text = "Nice Lib"
+	Copyright.Text = (winName); -- "Nice Lib"
 	Copyright.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Copyright.TextScaled = true
 	Copyright.TextSize = 14.000
