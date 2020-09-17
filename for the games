@@ -1,0 +1,227 @@
+local Library = {}
+
+local CusParent
+
+if game:GetService("CoreGui"):FindFirstChild('RobloxGui') then
+	CusParent = game:GetService("CoreGui").RobloxGui
+else
+  CusParent = game:GetService("CoreGui")
+end
+
+local function randomString()
+	local length = math.random(10,20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
+
+local function Corner(obj)
+	local UICorner = Instance.new("UICorner")
+	UICorner.Parent = obj
+end
+
+local function Drag(obj)
+	local function Smooth_Drag() 
+		local script = Instance.new('LocalScript', obj)
+		
+		local a=game:GetService("UserInputService")function drag(b)dragToggle=nil dragSpeed=0.23 dragInput=nil dragStart=nil dragPos=nil function updateInput(a)Delta=a.Position-dragStart Position=UDim2.new(startPos.X.Scale,startPos.X.Offset+Delta.X,startPos.Y.Scale,startPos.Y.Offset+Delta.Y)game:GetService("TweenService"):Create(b,TweenInfo.new(0.25),{Position=Position}):Play()end b.InputBegan:Connect(function(c)if(c.UserInputType==Enum.UserInputType.MouseButton1 or c.UserInputType==Enum.UserInputType.Touch)and a:GetFocusedTextBox()==nil then dragToggle=true dragStart=c.Position startPos=b.Position c.Changed:Connect(function()if c.UserInputState==Enum.UserInputState.End then dragToggle=false end end)end end)b.InputChanged:Connect(function(a)if a.UserInputType==Enum.UserInputType.MouseMovement or a.UserInputType==Enum.UserInputType.Touch then dragInput=a end end)game:GetService("UserInputService").InputChanged:Connect(function(a)if a==dragInput and dragToggle then updateInput(a)end end)end drag(script.Parent)
+	end
+	coroutine.wrap(Smooth_Drag)()
+end
+
+local function Sound(asset)
+	local delayed = (0.01)
+	local Sound = Instance.new("Sound")
+	Sound.Volume = 2
+	Sound.SoundId = ("rbxassetid://" .. asset)
+	Sound.Parent = game.Workspace
+	Sound:Play()
+	wait(Sound.TimeLength + delayed)
+	Sound:Destroy()
+end
+
+function Library:CreateWindow()
+	local UI_Libs = Instance.new("ScreenGui")
+	local Container = Instance.new("Frame")
+	local List = Instance.new("ScrollingFrame")
+	local UIGridLayout = Instance.new("UIGridLayout")
+	local Exit_UI = Instance.new("ImageButton")
+	local Copyright = Instance.new("TextLabel")
+	
+	UI_Libs.Name = randomString();
+	UI_Libs.Parent = CusParent;
+	UI_Libs.ResetOnSpawn = false
+	UI_Libs.Enabled = false;
+	
+	Container.Name = "Container"
+	Container.Parent = UI_Libs
+	Container.AnchorPoint = Vector2.new(0.5, 0.5)
+	Container.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	Container.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Container.Size = UDim2.new(0, 448, 0, 312)
+	Drag(Container)
+	Corner(Container)
+	
+	List.Name = "List"
+	List.Parent = Container
+	List.Active = true
+	List.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+	List.BorderSizePixel = 0
+	List.Position = UDim2.new(0.0144635607, 0, 0.166144833, 0)
+	List.Size = UDim2.new(0, 434, 0, 248)
+	List.CanvasSize = UDim2.new(0, 0, 999, 0)
+	List.ScrollBarImageTransparency = 1
+	
+	UIGridLayout.Parent = List
+	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout.CellPadding = UDim2.new(0, 4, 0, 5)
+	UIGridLayout.CellSize = UDim2.new(0, 100, 0, 33)
+	
+	Exit_UI.Name = "Exit_UI"
+	Exit_UI.Parent = Container
+	Exit_UI.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Exit_UI.BackgroundTransparency = 1.000
+	Exit_UI.BorderSizePixel = 0
+	Exit_UI.Position = UDim2.new(0.902290344, 0, 0.0144627169, 0)
+	Exit_UI.Size = UDim2.new(0, 36, 0, 33)
+	Exit_UI.Image = "rbxassetid://854297507"
+	Exit_UI.ScaleType = Enum.ScaleType.Crop
+	Exit_UI.MouseButton1Click:Connect(function()
+		UI_Libs:Destroy();
+		Sound(156286438);
+	end)
+	Exit_UI.MouseEnter:Connect(function()
+		Sound(1180994874);
+	end)
+	
+	Copyright.Name = "Copyright"
+	Copyright.Parent = Container
+	Copyright.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Copyright.BackgroundTransparency = 1.000
+	Copyright.BorderSizePixel = 0
+	Copyright.Position = UDim2.new(0.0144635607, 0, 0, 0)
+	Copyright.Size = UDim2.new(0, 268, 0, 44)
+	Copyright.Font = Enum.Font.Highway
+	Copyright.Text = "Nice Lib"
+	Copyright.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Copyright.TextScaled = true
+	Copyright.TextSize = 14.000
+	Copyright.TextStrokeTransparency = 0.700
+	Copyright.TextWrapped = true
+	Copyright.TextXAlignment = Enum.TextXAlignment.Left
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(Key,IsChat)
+		if IsChat then return end
+		if Key.KeyCode == Enum.KeyCode.LeftAlt then
+			UI_Libs.Enabled = (not UI_Libs.Enabled)
+		end
+	end)
+	
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Toggle Lib",
+		Text = "Left Alt",
+		Duration = 4,
+	})
+  
+	local SelfLibrary = {}
+	
+	function SelfLibrary:CreateBtn(btnGivenText, callback)
+		btnGivenText = btnGivenText or "New Button"
+		local callback = callback or function() end
+		
+		local Btn = Instance.new("TextButton")
+		local BtnsText = Instance.new("TextLabel")
+		
+		Btn.Name = "Btn"
+		Btn.Parent = List
+		Btn.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
+		Btn.BorderSizePixel = 0
+		Btn.Size = UDim2.new(0, 200, 0, 50)
+		Btn.Font = Enum.Font.SourceSans
+		Btn.Text = ""
+		Btn.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Btn.TextSize = 14.000
+		Corner(Btn)
+		
+		BtnsText.Name = "BtnsText"
+		BtnsText.Parent = Btn
+		BtnsText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		BtnsText.BackgroundTransparency = 1.000
+		BtnsText.BorderSizePixel = 0
+		BtnsText.Size = UDim2.new(0, 100, 0, 33)
+		BtnsText.Font = Enum.Font.Highway
+		BtnsText.Text = btnGivenText
+		BtnsText.TextColor3 = Color3.fromRGB(255, 255, 255)
+		BtnsText.TextSize = 13.000
+		BtnsText.TextStrokeTransparency = 0.700
+		BtnsText.TextWrapped = true
+		
+		Btn.MouseButton1Down:Connect(function()
+			pcall(callback);
+			Sound(156286438);
+		end)
+		
+		Btn.MouseEnter:Connect(function()
+			Sound(1180994874);
+		end)
+	end
+	
+	function SelfLibrary:CreateToggle(togGivenText, callback)
+		togGivenText = togGivenText or "New Toggle"
+		callback = callback or function() end
+		
+		local ToggleBtn = Instance.new("TextButton")
+		local BtnsText = Instance.new("TextLabel")
+		
+		ToggleBtn.Name = "ToggleBtn"
+		ToggleBtn.Parent = List
+		ToggleBtn.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
+		ToggleBtn.BorderSizePixel = 0
+		ToggleBtn.Size = UDim2.new(0, 200, 0, 50)
+		ToggleBtn.Font = Enum.Font.SourceSans
+		ToggleBtn.Text = ""
+		ToggleBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+		ToggleBtn.TextSize = 14.000
+		Corner(ToggleBtn)
+		
+		BtnsText.Name = "BtnsText"
+		BtnsText.Parent = ToggleBtn
+		BtnsText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		BtnsText.BackgroundTransparency = 1.000
+		BtnsText.BorderSizePixel = 0
+		BtnsText.Size = UDim2.new(0, 100, 0, 33)
+		BtnsText.Font = Enum.Font.Highway
+		BtnsText.Text = togGivenText
+		BtnsText.TextColor3 = Color3.fromRGB(255, 0, 0)
+		BtnsText.TextSize = 13.000
+		BtnsText.TextStrokeTransparency = 0.700
+		BtnsText.TextWrapped = true
+		
+		local enabled = false
+		local toggle = {
+			[true] = Color3.fromRGB(0, 255, 0),
+			[false] = Color3.fromRGB(255, 0, 0)
+		};
+		
+		ToggleBtn.MouseButton1Click:Connect(function()
+			enabled = (not enabled)
+			BtnsText.TextColor3 = toggle[enabled]
+			pcall(callback)
+			Sound(156286438)
+		end)
+		
+		ToggleBtn.MouseEnter:Connect(function()
+			Sound(1180994874)
+		end)
+	end
+	
+	function SelfLibrary:Ready()
+		UI_Libs.Enabled = true;
+	end
+	
+	return SelfLibrary
+end
+
+return Library
